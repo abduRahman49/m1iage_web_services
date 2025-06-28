@@ -21,6 +21,16 @@ class Tache(models.Model):
 
 
 class Profil(models.Model):
+    ADMIN = "Admin"
+    SUPERVISEUR = "Superviseur"
+    STANDARD = "Standard"
+
+    PROFIL = (
+        (ADMIN, 'admin'),
+        (SUPERVISEUR, 'superviseur'),
+        (STANDARD, 'standard')
+    )
+    libelle = models.CharField(choices=PROFIL, default=STANDARD)
     utilisateur = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
