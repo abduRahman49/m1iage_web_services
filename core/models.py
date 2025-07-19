@@ -16,6 +16,7 @@ class Tache(models.Model):
     description = models.CharField(max_length=255, null=True)
     est_terminee = models.BooleanField(default=False)
     date_creation = models.DateTimeField(auto_now_add=True)
+    date_fin = models.DateTimeField(null=True)
     categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=True) # plusieurs à un
     listes_taches = models.ManyToManyField(ListeTache) # plusieurs à plusieurs
 
