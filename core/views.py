@@ -39,3 +39,13 @@ def detail_tache_view(request, id):
         return HttpResponse(infos_tache)
     except Tache.DoesNotExist:
         return HttpResponse("La tâche n'existe pas")
+
+
+def liste_taches_view(request):
+    q = request.GET.get("q") # récupération du paramètre d'url "q" depuis l'attribut GET de l'objet request
+    taches_recherchees = Tache.objects.filter(libelle__contains=q)
+    if taches_recherchees.exists(): # la méthode exists() du QuerySet vérifie si des éléments du modèle correspondent au critère de recherche
+        message = ", ".join(tache.libelle for tache in taches_recherchees)
+        return HttpResponse(message)
+    
+    return HttpResponse("Aucune tâche ne correspond au critère recherché")

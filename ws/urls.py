@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import hello_view, HiView, detail_tache_view
+from core.views import hello_view, HiView, detail_tache_view, liste_taches_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/<str:nom>/', hello_view), # association (url -> view)
     path('hi/', HiView.as_view()), # association (url -> view)
     path('tache/<int:id>/', detail_tache_view), # association (url -> view)
+    path('liste-taches/', liste_taches_view), # association (url -> view)
 ]
