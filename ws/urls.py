@@ -17,11 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import hello_view, HiView, detail_tache_view, liste_taches_view
+from bibliotheque.views import hello_view, nombre_livres_view, detail_livre_view, WelcomeView, BooksBeforeView, BookView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/<str:nom>/', hello_view), # association (url -> view)
-    path('hi/', HiView.as_view()), # association (url -> view)
-    path('tache/<int:id>/', detail_tache_view), # association (url -> view)
+    # path('hello/<str:nom>/', hello_view), # association (url -> view)
+    # path('hi/', HiView.as_view()), # association (url -> view)
+    # path('tache/<int:id>/', detail_tache_view), # association (url -> view)
     path('liste-taches/', liste_taches_view), # association (url -> view)
+    path('hello/<str:username>/', hello_view), # association (url -> view)
+    path('nombre-livres/', nombre_livres_view), # association (url -> view)
+    path('books/<int:book_id>/', detail_livre_view), # association (url -> view)
+    path('welcome/<str:username>/', WelcomeView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
+    path('books/before/<int:year>/', BooksBeforeView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
+    path('books/create/', BookView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
 ]
