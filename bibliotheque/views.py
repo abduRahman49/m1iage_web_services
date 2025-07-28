@@ -92,6 +92,21 @@ class CreateView(View):
         return HttpResponse(f"Vous avez créé le livre {livre.id} intitulé {livre.title}")
     
 
+class UpdateView(View):
+
+    def get(self, request, id):
+        livre = Book.objects.get(id=id)
+        context = {"livre": livre}
+        return render(request, "bibliotheque/update_livre.html", context)
+    
+    def post(self, request):
+        titre = request.POST.get("titre")
+        auteur = request.POST.get("auteur")
+        date_publication = request.POST.get("date_publication")
+        livre = Book.objects.create(title=titre, author=auteur, published_year=date_publication)
+        return HttpResponse(f"Vous avez créé le livre {livre.id} intitulé {livre.title}")
+    
+
 def display_books(request):
     books = Book.objects.all()
     context = {"livres": books}

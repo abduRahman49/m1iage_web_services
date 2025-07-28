@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création livre</title>
+</head>
+<body>
+    
+    <form method="post" action="{% url 'update-livre' livre.id %}">
+        {% csrf_token %}
+
+        <label>Titre</label>
+        <input type="text" name="titre" value="{{ livre.title }}" required>
+
+        <label>Auteur</label>
+        <input type="text" name="auteur" value="{{ livre.author }}" required>
+
+        <label>Date publication</label>
+        <input type="text" name="date_publication" value="{{ livre.published_year }}" required>
+
+        <button>Mettre à jour</button>
+    </form>
+</body>
+</html>

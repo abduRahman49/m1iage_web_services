@@ -21,7 +21,7 @@
             <td>{{ livre.title }}</td>
             <td>{{ livre.author }}</td>
             <td>{{ livre.published_year }}</td>
-            <td><a href="#">Mise à jour</a></td>
+            <td><a href="{% url 'update-livre' livre.id %}">Mise à jour</a></td>
             <td><a href="#">Supprimer</a></td>
             <td><a href="#">Détails</a></td>
         </tr>
