@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affichage des livres</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Date publication</th>
+            <th>#</th>
+            <th>#</th>
+            <th>#</th>
+        </tr>
+
+    {% for livre in livres %}
+        <tr>
+            <td>{{ livre.title }}</td>
+            <td>{{ livre.author }}</td>
+            <td>{{ livre.published_year }}</td>
+            <td><a href="#">Mise à jour</a></td>
+            <td><a href="#">Supprimer</a></td>
+            <td><a href="#">Détails</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

@@ -77,3 +77,22 @@ class BookView(View):
         published_year = request.POST.get("published_year")
         book = Book.objects.create(title=title, author=author, published_year=published_year)
         return HttpResponse(f"Vous avez créé le livre avec l'id {book.id} et intitulé {book.title}")
+
+
+class CreateView(View):
+
+    def get(self, request):
+        return render(request, "bibliotheque/creation_livre.html")
+    
+    def post(self, request):
+        titre = request.POST.get("titre")
+        auteur = request.POST.get("auteur")
+        date_publication = request.POST.get("date_publication")
+        livre = Book.objects.create(title=titre, author=auteur, published_year=date_publication)
+        return HttpResponse(f"Vous avez créé le livre {livre.id} intitulé {livre.title}")
+    
+
+def display_books(request):
+    books = Book.objects.all()
+    context = {"livres": books}
+    return render(request, "bibliotheque/liste_livres.html", context)
