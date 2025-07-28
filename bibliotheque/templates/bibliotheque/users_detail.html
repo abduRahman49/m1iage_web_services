@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Bonjour {{ nom }}</p>
+
+    {% if is_graduated %}
+        <p>Il est diplômé</p>
+    {% else %}
+        <p>Il n'est pas dipômé</p>
+    {% endif %}
+
+    Il suit les cours suivants
+    {% for cours in liste_cours %}
+        <li>{{ cours }}</li>
+    {% endfor %}
+</body>
+</html>

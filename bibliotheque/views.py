@@ -7,6 +7,18 @@ from django.utils.decorators import method_decorator
 
 # Create your views here.
 
+def display_user_details(request):
+    # Chaque clé représente une variable dans le template
+    cours = ["Python", "Django", "Statistiques", "Probabilité"]
+    context = {"nom": "Abdou SEYE", "is_graduated": False, "liste_cours": cours}
+    return render(request, "bibliotheque/users_detail.html", context)
+
+def home(request):
+    nom = "Abdou SEYE"
+    context = {"nom": nom, "is_graduated": True}
+    return render(request, "bibliotheque/index.html", context)
+
+@csrf_exempt
 def hello_view(request, username=None):
     message = f"Bonjour, {username} ! Bienvenue sur la bibliothèque."
     return HttpResponse(message)
@@ -60,4 +72,8 @@ class BookView(View):
         return HttpResponse("Utilisez POST pour ajouter un livre.")
     
     def post(self, request):
-        return HttpResponse("Vous avez accédé à la vue avec la méthode POST")
+        title = request.POST.get("title")
+        author = request.POST.get("author")
+        published_year = request.POST.get("published_year")
+        book = Book.objects.create(title=title, author=author, published_year=published_year)
+        return HttpResponse(f"Vous avez créé le livre avec l'id {book.id} et intitulé {book.title}")

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core.views import hello_view, HiView, detail_tache_view, liste_taches_view
-from bibliotheque.views import hello_view, nombre_livres_view, detail_livre_view, WelcomeView, BooksBeforeView, BookView
+from bibliotheque.views import hello_view, nombre_livres_view, detail_livre_view, WelcomeView, BooksBeforeView, BookView, home, display_user_details
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +31,6 @@ urlpatterns = [
     path('welcome/<str:username>/', WelcomeView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
     path('books/before/<int:year>/', BooksBeforeView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
     path('books/create/', BookView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
+    path('home/', home), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
+    path('user-details/', display_user_details), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
 ]
