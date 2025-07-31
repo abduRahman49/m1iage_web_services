@@ -15,21 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from core.views import hello_view, HiView, detail_tache_view, liste_taches_view
-from bibliotheque.views import (
-    hello_view,
-    nombre_livres_view,
-    detail_livre_view,
-    WelcomeView,
-    BooksBeforeView,
-    BookView,
-    home,
-    display_user_details,
-    CreateView,
-    display_books,
-    UpdateView
-)
+from authentification.views import InscritionView, LoginView, index_view, logout_view, UpdatePasswordView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,14 +27,10 @@ urlpatterns = [
     # path('tache/<int:id>/', detail_tache_view), # association (url -> view)
     path('liste-taches/', liste_taches_view), # association (url -> view)
     path('hello/<str:username>/', hello_view), # association (url -> view)
-    path('nombre-livres/', nombre_livres_view), # association (url -> view)
-    path('books/<int:book_id>/', detail_livre_view), # association (url -> view)
-    path('welcome/<str:username>/', WelcomeView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
-    path('books/before/<int:year>/', BooksBeforeView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
-    path('books/create/', BookView.as_view()), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
-    path('home/', home), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
-    path('user-details/', display_user_details), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
-    path('livre/creer', CreateView.as_view(), name="creation-livre"), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
-    path('livre/liste', display_books, name="affichage-livres"), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
-    path('livre/update/<int:id>/', UpdateView.as_view(), name="update-livre"), # association (url -> view) appeler à chaque fois la méthode as_view() des vues basées sur des classes
+    path('bibliotheque/', include("bibliotheque.urls")), # association (url -> view)
+    path('authentification/inscription/', InscritionView.as_view(), name="inscription"),
+    path('authentification/connexion/', LoginView.as_view(), name="login-view"),
+    path('authentification/logout/', logout_view, name="logout-view"),
+    path('authentification/update-password/', UpdatePasswordView.as_view(), name="update-view"),
+    path('home/', index_view, name="home"),
 ]

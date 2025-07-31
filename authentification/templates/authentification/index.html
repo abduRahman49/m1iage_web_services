@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {# lorsque l'utilisateur est connecté l'objet request va disposer d'un attribut user
+        On aura donc 'request.user' qui contient l'utilisateur connecté
+    #}
+    <p>Bonjour {{ request.user.username }}!</p>
+
+
+    <a href="{% url 'logout-view' %}">Se déconnecter</a>
+</body>
+</html>
