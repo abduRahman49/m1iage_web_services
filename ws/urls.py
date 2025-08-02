@@ -33,4 +33,5 @@ urlpatterns = [
     path('authentification/logout/', logout_view, name="logout-view"),
     path('authentification/update-password/', UpdatePasswordView.as_view(), name="update-view"),
     path('home/', index_view, name="home"),
+    path('ecommerce/', include("ecommerce.urls"))
 ]

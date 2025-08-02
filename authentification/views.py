@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 # import le décorateur à appliquer
 from django.contrib.auth.decorators import login_required
@@ -11,14 +11,20 @@ from django.utils.decorators import method_decorator
 
 class InscritionView(View):
     def get(self, request):
-        return render(request, 'authentification/inscription.html')
+        roles = [role.name for role in Group.objects.all()]
+        context = {"roles": roles}
+        return render(request, 'authentification/inscription.html', context)
 
     def post(self, request):
         # Handle form submission logic here
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        # récupération du role
+        role = request.POST.get("role")
+        group = Group.objects.filter(name=role).first()
         user = User.objects.create_user(username=username, email=email, password=password)
+        user.groups.add(group)
         return HttpResponse(f"L'utilisateur {user.username} a été créé avec succès!")
 
 
